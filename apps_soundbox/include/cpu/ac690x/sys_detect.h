@@ -53,6 +53,7 @@ void usb_sd_detect_mult_api(void);
 void pwr_level_config(u8 default_level);
 u8 get_pwr_config_flag();
 void pa_umute(void);
+void ear_light_set_status(u8 status);
 // void pa_2_AB(void);
 // void pa_2_D(void);
 void pa_mute(void);
