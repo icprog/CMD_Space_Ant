@@ -301,8 +301,8 @@ tu8 get_key_value(void)
 const u32 BT_Double_Click_msg_tab[10] = 
 {
                         /*00*/    NO_MSG,\
-                        /*01*/    MSG_CHANGE_NET_RES_GRADE_PRIMARY,\
-                        /*02*/    MSG_CHANGE_NET_RES_GRADE_JUNIOR,\
+                        /*01*/    MSG_CHANGE_NET_RES_SUB_PRIMARY,\
+                        /*02*/    MSG_CHANGE_NET_RES_SUB_JUNIOR,\
                         /*03*/    NO_MSG,\
                         /*04*/    NO_MSG,\
                         /*05*/    NO_MSG,\

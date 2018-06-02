@@ -333,8 +333,8 @@ void rcsp_event_com_start(u8 type)
     rcsp_send_tmp_buf = malloc(RCSP_SEND_TMP_BUF_SIZE);
     CHECK_MALLOC(rcsp_send_tmp_buf,1);
 	
-	eq_data_init();
-	check_eq_sw_update();
+	/* eq_data_init(); */
+	/* check_eq_sw_update(); */
 	rcsp_set_fs_file_ext((void*)dec_file_ext);
     rcsp_support_app_register();
     rcsp_register_msg_cbk(rscp_msg_deal_callback);
@@ -1591,7 +1591,11 @@ u8 rcsp_event_cbk_send_process(int send_allow_flag)
 		{
             rcsp_db_puts("--change mode\n");
             rcsp_com_report_flag &= (~RCSP_REPORT_WORKMODE_ACTION);
-   			Post_msg_to_rcsp_Task_do(MSG_RSCP_CHANGE_WORDMODE_ACTION, (u32)&support_taskname_group[rcsp_curr_task_id],(u32)rcsp_curr_task_id);
+   			//Post_msg_to_rcsp_Task_do(MSG_RSCP_CHANGE_WORDMODE_ACTION, (u32)&support_taskname_group[rcsp_curr_task_id],(u32)rcsp_curr_task_id);
+			if(rcsp_curr_task_id != -1)
+			{
+				Post_msg_to_rcsp_Task_do(MSG_RSCP_CHANGE_WORDMODE_ACTION, (u32)&support_taskname_group[rcsp_curr_task_id],(u32)rcsp_curr_task_id);
+			}
 			break;
 		}
 

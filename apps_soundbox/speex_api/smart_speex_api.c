@@ -8,6 +8,7 @@
 #include "ai_toy.h"
 #include "sys_detect.h"
 #include "dac/dac_api.h"
+#include "bt_smart.h"
 
 
 #define	SPEEX_ENCODE_TASK_NAME						"SPEEX_ENCODE_TASK" 
@@ -21,7 +22,7 @@
 #define SPEEX_VAD_NO_SPEAK_START_THRESHOLD			(80L)//(51L)
 #define SPEEX_VAD_SPEAK_TIMEOUT_N_SECOND			(10 * SPEEX_TIMEOUT_SECOND)						
 #define SPEEX_VAD_NO_SPEAK_TIMEOUT_N_SECOND			(10 * SPEEX_TIMEOUT_SECOND)						
-#define SPEEX_VAD_MIN_N_SECOND						((1 * SPEEX_TIMEOUT_SECOND) / 2)						
+#define SPEEX_VAD_MIN_N_SECOND						100//((1 * SPEEX_TIMEOUT_SECOND) / 2)						
 
 
 
@@ -205,7 +206,14 @@ tbool bt_smart_speex_data_send(u8 speech_source, u8 op)
 	}
 
 	bt_smart_speex_data_send_cancel();//告知app取消上次的语音输入
-	bt_prompt_play_by_name(AI_TOY_NOTICE_SPEECH_INPUT, NULL);
+	if((op == AI_MODE_CH_2_EN) || (op == AI_MODE_EN_2_CH))
+	{
+		bt_prompt_play_by_name(AI_TOY_NOTICE_SPEECH_TRANC, NULL);
+	}
+	else
+	{
+		bt_prompt_play_by_name(AI_TOY_NOTICE_SPEECH_INPUT, NULL);
+	}
 	if(mutex_resource_apply("speex", 3, (void *)bt_smart_speex_encode_start, (void *)bt_smart_speex_encode_stop))
 	{
 		rcsp_smart_command_send(CBW_CMD_SPEEX_SEND_START, send_buf, 2);
